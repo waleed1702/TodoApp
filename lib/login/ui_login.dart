@@ -21,10 +21,26 @@ class _LoginState extends State<Login> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            ValueListenableBuilder(
+              valueListenable: widget.uiLogic.id,
+              builder: (context, value, child) {
+                if (value == null) {
+                  return const SizedBox();
+                } else if (value == '') {
+                  return const Text('Invalid User');
+                } else {
+                  return Text(value);
+                }
+              },
+            ),
             textFeild(controller: widget.uiLogic.userName, lebal: 'User name'),
-            textFeild(controller: widget.uiLogic.password, lebal: 'Password'),
+            textFeild(
+              controller: widget.uiLogic.password,
+              lebal: 'Password',
+              obscure: true,
+            ),
             ElevatedButton(
-                onPressed: () => widget.uiLogic.controller.loginUser(),
+                onPressed: () => widget.uiLogic.fetchData(),
                 child: const Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Text("Login"),

@@ -2,42 +2,36 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class LoginController {
-  var url;
-  Future loginUser(
-      // {
-      // required VoidCallback onInit,
-      // required Function(dynamic) onSuccess,
-      // required VoidCallback onEnd,
-      // }
-      ) async {
-    url = Uri.parse('https://dummyjson.com/auth/login');
-    // Call the onInit callback
-    // onInit() => };
+  static const String _loginUrl = 'https://dummyjson.com/auth/login';
+  String? id;
 
-    try {
-      var response = await http.post(
-        url,
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'username': 'emilys',
-          'password': 'emilyspass',
-          'expiresInMins': 30, // optional, defaults to 60
-        }),
-      );
+  Future<String> loginUser(username, password) async {
+    {
+      onInit() => {};
 
-      if (response.statusCode == 200) {
-        var jsonResponse = jsonDecode(response.body);
-        print(jsonResponse);
-        // Call the onSuccess callback with the decoded JSON data
-        // onSuccess(jsonResponse);
-      } else {
-        print('Request failed with status: ${response.statusCode}.');
+      try {
+        var res = await http.post(
+          Uri.parse(_loginUrl),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode({
+            'username': username, //'emilys'
+            'password': password, //'emilyspass'
+            'expiresInMins': 30, // optional, defaults to 60
+          }),
+        );
+
+        if (res.statusCode == 200) {
+          var json = jsonDecode(res.body);
+          id = json['id'].toString();
+        }
+      } catch (e) {
+        print('Error during login: $e');
+        // Handle errors here, like showing a snackbar or retry option
+      } finally {
+        id = id ?? '';
       }
-    } catch (e) {
-      print('Request failed with error: $e');
-    } finally {
-      // Call the onEnd callback
-      // onEnd();
+
+      return id!;
     }
   }
 }

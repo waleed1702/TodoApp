@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 Widget textFeild({
   controller,
   lebal,
+  obscure = false,
 }) {
   final control = controller;
 
@@ -15,6 +16,7 @@ Widget textFeild({
         Text(lebal),
         TextField(
           controller: control,
+          obscureText: obscure,
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20.0),
