@@ -1,16 +1,16 @@
-import 'package:todo_app/login/c_login.dart';
+import 'package:todo_app/home/c_home.dart';
 import 'package:flutter/material.dart';
 
-class UILoginLogin extends ChangeNotifier {
+class UILogicHome extends ChangeNotifier {
   String? id;
 
   bool buttonEnable = true;
 
   final userName = TextEditingController();
   final password = TextEditingController();
-  final controller = LoginController();
+  final controller = HomeController();
 
-  UILoginLogin() {
+  UILogicHome() {
     userName.addListener(_updateButtonState);
     password.addListener(_updateButtonState);
   }
@@ -25,5 +25,6 @@ class UILoginLogin extends ChangeNotifier {
     id = await controller.loginUser(userName.text, password.text);
     buttonEnable = true;
     notifyListeners();
+    if (id!.isNotEmpty) {}
   }
 }
