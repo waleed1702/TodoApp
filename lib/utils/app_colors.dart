@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static Color background = const Color(0xFFF6F5F2);
+  static Color background = const Color.fromARGB(255, 144, 193, 200);
 }

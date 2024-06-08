@@ -1,9 +1,18 @@
+import 'package:todo_app/utils/app_colors.dart';
 import 'package:todo_app/login/ui_l_login.dart';
 import 'package:todo_app/login/ui_login.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => UILoginLogin()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -13,13 +22,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme:
-            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 23, 84, 130)),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.background),
         useMaterial3: true,
       ),
-      home: Login(
-        uiLogic: UILoginLogin(),
-      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const Login(),
+        // '/home': (context) => const HomeScreen(),
+      },
     );
   }
 }

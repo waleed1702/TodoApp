@@ -1,33 +1,33 @@
 import 'package:flutter/material.dart';
 
-Widget textFeild({
-  controller,
-  lebal,
-  obscure = false,
-}) {
-  final control = controller;
+class TextFeild extends StatelessWidget {
+  final TextEditingController controller;
+  final String label;
+  final bool obscure;
 
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(lebal),
-        TextField(
-          controller: control,
-          obscureText: obscure,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20.0),
-              borderSide: const BorderSide(
-                color: Color.fromARGB(255, 8, 209, 182), // Color for the border
-                width: 2.0,
-              ),
-            ),
+  const TextFeild({
+    Key? key,
+    required this.controller,
+    required this.label,
+    this.obscure = false,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+      child: TextField(
+        controller: controller,
+        obscureText: obscure,
+        decoration: InputDecoration(
+          labelText: label,
+          filled: true,
+          fillColor: Colors.white,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.0),
           ),
         ),
-      ],
-    ),
-  );
+      ),
+    );
+  }
 }

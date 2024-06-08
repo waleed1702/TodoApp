@@ -7,16 +7,14 @@ class LoginController {
 
   Future<String> loginUser(username, password) async {
     {
-      onInit() => {};
-
       try {
         var res = await http.post(
           Uri.parse(_loginUrl),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode({
-            'username': username, //'emilys'
-            'password': password, //'emilyspass'
-            'expiresInMins': 30, // optional, defaults to 60
+            'username': 'emilys', // username,
+            'password': 'emilyspass', //password,
+            'expiresInMins': 30,
           }),
         );
 
@@ -24,13 +22,10 @@ class LoginController {
           var json = jsonDecode(res.body);
           id = json['id'].toString();
         }
-      } catch (e) {
-        print('Error during login: $e');
-        // Handle errors here, like showing a snackbar or retry option
+      } catch (_) {
       } finally {
         id = id ?? '';
       }
-
       return id!;
     }
   }
