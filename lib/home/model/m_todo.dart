@@ -19,7 +19,7 @@ class TodoList {
 class Todo {
   final int id;
   final String todo;
-  final bool completed;
+  bool completed;
   final int userId;
 
   Todo({
